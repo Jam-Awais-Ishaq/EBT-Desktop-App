@@ -11,11 +11,13 @@ const {
   dialog,
   Menu,
   desktopCapturer,
+  nativeTheme,
 } = require("electron");
 const fs = require("fs");
 const path = require("path");
 const { startGlobalInputTracker } = require("./globalInputTracker.cjs");
 const { createAppUsageTracker } = require("./appUsageTracker.cjs");
+const { initAutoUpdater, stopAutoUpdater } = require("./autoUpdater.cjs");
 
 /** `null` = hook not running. Only active while task timer runs (renderer IPC). */
 let globalInputTracker = null;
@@ -101,6 +103,8 @@ ipcMain.handle("app-usage-consume-for-sync", () => ({
 const devServerUrl = process.env.VITE_DEV_SERVER_URL;
 const loadFromDisk = !devServerUrl;
 
+const APP_ICON = path.join(__dirname, "..", "public", "trackerLogo.png");
+
 function buildCspHeader() {
   // Keep it strict (no unsafe-eval). Allow dev server + local APIs.
   const self = `'self'`;
@@ -123,6 +127,9 @@ function buildCspHeader() {
       : [self, `'unsafe-inline'`, `'unsafe-eval'`],
     connectSrc: [
       self,
+      // Production APIs (Render etc.) — built app must reach https backends.
+      "https:",
+
       "http://127.0.0.1:3000",
       "http://localhost:3000",
 
@@ -217,11 +224,59 @@ ipcMain.handle("capture-work-screenshot", async () => {
   }
 });
 
+const WINDOW_WIDTH = 420;
+
+const WINDOW_CHROME = {
+  light: {
+    backgroundColor: "#f5f5f5",
+    titleBarColor: "#ffffff",
+    titleBarSymbolColor: "#171717",
+  },
+  dark: {
+    backgroundColor: "#252528",
+    titleBarColor: "#2e2e32",
+    titleBarSymbolColor: "#ffffff",
+  },
+};
+
+let mainWindow = null;
+
+function applyWindowChrome(win, mode) {
+  if (!win || win.isDestroyed()) return;
+  const chrome = WINDOW_CHROME[mode === "dark" ? "dark" : "light"];
+  win.setBackgroundColor(chrome.backgroundColor);
+  if (process.platform === "win32" && typeof win.setTitleBarOverlay === "function") {
+    try {
+      win.setTitleBarOverlay({
+        color: chrome.titleBarColor,
+        symbolColor: chrome.titleBarSymbolColor,
+        height: 32,
+      });
+    } catch {
+      /* unsupported on older Windows */
+    }
+  }
+}
+
+ipcMain.handle("set-window-theme", (_event, payload) => {
+  const mode = payload?.mode === "dark" ? "dark" : "light";
+  nativeTheme.themeSource = mode;
+  applyWindowChrome(mainWindow, mode);
+  return { ok: true };
+});
+
 function createWindow() {
+  const initialChrome = WINDOW_CHROME.light;
   const win = new BrowserWindow({
     title: "Time Tracker",
-    width: 400,
-    height: 800,
+    icon: fs.existsSync(APP_ICON) ? APP_ICON : undefined,
+    width: WINDOW_WIDTH,
+    minWidth: WINDOW_WIDTH,
+    maxWidth: WINDOW_WIDTH,
+    height: 700,
+    backgroundColor: initialChrome.backgroundColor,
+    maximizable: false,
+    fullscreenable: false,
     show: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
@@ -234,6 +289,9 @@ function createWindow() {
     },
     autoHideMenuBar: true,
   });
+  mainWindow = win;
+  nativeTheme.themeSource = "light";
+  applyWindowChrome(win, "light");
   win.setMenuBarVisibility(false);
   attachSuppressDevConsoleNoise(win.webContents);
 
@@ -311,14 +369,17 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  app.setName("Time Tracker");
   createWindow();
   probeNativeModule();
+  initAutoUpdater();
 });
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
 });
 
 app.on("will-quit", () => {
+  stopAutoUpdater();
   if (globalInputTracker?.stop) {
     globalInputTracker.stop();
     globalInputTracker = null;

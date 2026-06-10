@@ -5,6 +5,7 @@ import Refresh from '@mui/icons-material/Refresh'
 import Search from '@mui/icons-material/Search'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import IconButton from '@mui/material/IconButton'
@@ -17,16 +18,15 @@ import { alpha, useTheme } from '@mui/material/styles'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import ThemeModeToggle from '../ThemeModeToggle'
 import { getProfile, getTasks } from '../../apiImportsFunctions/apiAuth'
 import TaskContractsList from './TaskContractsList'
 import {
   mapTaskToListItem,
   taskRowsFromApiPayload,
 } from './taskProjectUtils'
-import UpworkLogoMark from './gdcworkLogoMark'
 import { logout as logoutAction } from '../../store/loginFormSlice'
 import { BRAND_ORANGE_HEX } from '../../theme/colorTokens'
+import { ThemeModeMenuToggle } from '../ThemeModeToggle'
 
 const CRM_PROFILE_URL = 'https://gdc-crm-woad.vercel.app'
 const CRM_CHATPENAL_URL = 'https://gdc-crm-woad.vercel.app'
@@ -180,24 +180,6 @@ export default function TimeTrackerHome() {
         color: 'text.primary',
       }}
     >
-      <Box
-        component="header"
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 2,
-          px: PAGE_SIDE_INSET,
-          py: 1.25,
-          borderBottom: 1,
-          borderColor: 'divider',
-          flexShrink: 0,
-        }}
-      >
-        <UpworkLogoMark />
-        <ThemeModeToggle />
-      </Box>
-
       <Box
         component="main"
         sx={{
@@ -536,6 +518,9 @@ export default function TimeTrackerHome() {
           >
             See Profile
           </MenuItem>
+          <Divider />
+          <ThemeModeMenuToggle />
+          <Divider />
           <MenuItem
             onClick={() => {
               closeProfileMenu()

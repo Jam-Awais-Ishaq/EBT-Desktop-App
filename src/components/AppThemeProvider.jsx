@@ -11,6 +11,7 @@ export default function AppThemeProvider({ children }) {
 
   useEffect(() => {
     applyAppColorCssVars(mode)
+    window.electronAPI?.setWindowTheme?.(mode)
   }, [mode])
 
   return (

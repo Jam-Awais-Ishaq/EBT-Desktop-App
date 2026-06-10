@@ -1,40 +1,44 @@
 import DarkModeOutlined from '@mui/icons-material/DarkModeOutlined'
-import LightModeOutlined from '@mui/icons-material/LightModeOutlined'
-import IconButton from '@mui/material/IconButton'
-import Tooltip from '@mui/material/Tooltip'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import MenuItem from '@mui/material/MenuItem'
+import Switch from '@mui/material/Switch'
 import { useDispatch, useSelector } from 'react-redux'
 import { APP_COLOR_MODE } from '../theme/colorTokens'
 import { toggleThemeMode } from '../store/themeModeSlice'
 
-export default function ThemeModeToggle({ size = 'small' }) {
+/** Dark/light switch for profile menu — single theme control for the whole app. */
+export function ThemeModeMenuToggle() {
   const mode = useSelector((s) => s.themeMode.mode)
   const dispatch = useDispatch()
   const isDark = mode === APP_COLOR_MODE.DARK
 
+  const handleToggle = (event) => {
+    event.stopPropagation()
+    dispatch(toggleThemeMode())
+  }
+
   return (
-    <Tooltip title={isDark ? 'Light mode' : 'Dark mode'} enterDelay={400}>
-      <IconButton
-        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        onClick={() => dispatch(toggleThemeMode())}
-        size={size}
-        sx={{
-          color: 'text.primary',
-          border: 1,
-          borderColor: 'divider',
-          bgcolor: 'background.paper',
-          '&:hover': {
-            bgcolor: 'action.hover',
-            borderColor: 'primary.main',
-            color: 'primary.main',
-          },
-        }}
-      >
-        {isDark ? (
-          <LightModeOutlined sx={{ fontSize: 22 }} />
-        ) : (
-          <DarkModeOutlined sx={{ fontSize: 22 }} />
-        )}
-      </IconButton>
-    </Tooltip>
+    <MenuItem
+      dense
+      onClick={(event) => {
+        event.preventDefault()
+        event.stopPropagation()
+      }}
+      sx={{ cursor: 'default', '&:hover': { bgcolor: 'action.hover' } }}
+    >
+      <ListItemIcon sx={{ minWidth: 36 }}>
+        <DarkModeOutlined fontSize="small" />
+      </ListItemIcon>
+      <ListItemText primary="Dark mode" />
+      <Switch
+        edge="end"
+        size="small"
+        checked={isDark}
+        onChange={handleToggle}
+        onClick={(event) => event.stopPropagation()}
+        inputProps={{ 'aria-label': 'Toggle dark mode' }}
+      />
+    </MenuItem>
   )
 }

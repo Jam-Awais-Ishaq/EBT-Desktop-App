@@ -35,4 +35,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.invoke('set-app-usage-tracking', { enabled: Boolean(enabled) }),
   getAppUsageSnapshot: () => ipcRenderer.invoke('app-usage-get-snapshot'),
   consumeAppUsageForSync: () => ipcRenderer.invoke('app-usage-consume-for-sync'),
+  /** Sync native title bar + window chrome with app light/dark mode. */
+  setWindowTheme: (mode) =>
+    ipcRenderer.invoke('set-window-theme', { mode: mode === 'dark' ? 'dark' : 'light' }),
 })

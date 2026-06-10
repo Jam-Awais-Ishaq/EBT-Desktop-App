@@ -15,7 +15,6 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { IMAGE_URLS } from '../constants/imageUrls'
 import { useLoginForm } from '../features/login/loginFormLogic'
-import ThemeModeToggle from './ThemeModeToggle'
 import { getAppColors } from '../theme/colorTokens'
 
 const squareControlSx = {
@@ -72,17 +71,6 @@ export default function Login() {
         },
       }}
     >
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 16,
-          right: 16,
-          zIndex: 2,
-        }}
-      >
-        <ThemeModeToggle />
-      </Box>
-
       <Paper
         elevation={0}
         sx={{
@@ -103,7 +91,11 @@ export default function Login() {
         >
           <Box
             component="img"
-            src={IMAGE_URLS.globalDigitalCareLogoMark}
+            src={
+              mode === 'dark'
+                ? IMAGE_URLS.globalDigitalCareLogoMarkDark
+                : IMAGE_URLS.globalDigitalCareLogoMark
+            }
             alt=""
             sx={{
               display: 'block',

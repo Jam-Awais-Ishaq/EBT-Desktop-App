@@ -5,8 +5,6 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 
-import ThemeModeToggle from '../ThemeModeToggle'
-
 export default function AppUsageHeader({ loading, onRefresh }) {
   const navigate = useNavigate()
 
@@ -38,25 +36,22 @@ export default function AppUsageHeader({ loading, onRefresh }) {
           App Usage
         </Typography>
       </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-        <IconButton
-          aria-label="Refresh app usage"
-          onClick={onRefresh}
-          disabled={loading}
-          size="small"
-          sx={{
-            color: 'text.secondary',
-            border: 1,
-            borderColor: 'divider',
-            borderRadius: '10px',
-            width: 36,
-            height: 36,
-          }}
-        >
-          <Refresh sx={{ fontSize: 18 }} />
-        </IconButton>
-        <ThemeModeToggle />
-      </Box>
+      <IconButton
+        aria-label="Refresh app usage"
+        onClick={onRefresh}
+        disabled={loading}
+        size="small"
+        sx={{
+          color: 'text.secondary',
+          border: 1,
+          borderColor: 'divider',
+          borderRadius: '10px',
+          width: 36,
+          height: 36,
+        }}
+      >
+        <Refresh sx={{ fontSize: 18 }} />
+      </IconButton>
     </Box>
   )
 }

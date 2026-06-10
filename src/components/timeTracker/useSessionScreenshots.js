@@ -5,8 +5,8 @@ import { postTimerScreenshot } from '../../apiImportsFunctions/apiAuth'
 import { workScreenshotRecorded } from '../../store/loginFormSlice'
 
 /** Testing: fixed 10s between captures (restore Upwork-style random multi-minute delays for production). */
-const FIRST_CAPTURE_MS = 1 * 60 * 1000
-const NEXT_CAPTURE_MS = 1 * 60 * 1000
+const FIRST_CAPTURE_MS = 6 * 60 * 1000
+const NEXT_CAPTURE_MS = 6 * 60 * 1000
 
 function base64ToPngBlob(b64) {
   const bin = atob(b64)

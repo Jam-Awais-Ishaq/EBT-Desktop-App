@@ -21,7 +21,6 @@ import { getTimerRecord } from '../../apiImportsFunctions/apiAuth'
 import { getTaskStatusPresentation, getSessionStatusPillPresentation } from './taskProjectUtils'
 import { sessionHistoryDurationSeconds } from './timerSessionUtils'
 import { TIMER_TIME_ZONE } from './timerTimeZone'
-import ThemeModeToggle from '../ThemeModeToggle'
 
 function tileCardChrome(mode) {
   const isDark = mode === 'dark'
@@ -164,7 +163,6 @@ export default function SessionDetailsPage() {
             Session details
           </Typography>
         </Box>
-        <ThemeModeToggle size="small" />
       </Box>
 
       <Box

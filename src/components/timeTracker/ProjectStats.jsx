@@ -23,7 +23,6 @@ import {
   taskTimerPaused,
   taskTimerStarted,
 } from '../../store/loginFormSlice'
-import ThemeModeToggle from '../ThemeModeToggle'
 
 import ProjectCurrentSession from './ProjectCurrentSession'
 import TimerProjectHistory from './TimerProjectHistory'
@@ -647,7 +646,6 @@ export default function ProjectStats() {
               {project.name}
             </Typography>
           </Box>
-          <ThemeModeToggle />
         </Box>
 
         <ProjectCurrentSession

@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
-import ThemeModeToggle from '../ThemeModeToggle'
 
 import ActivityCheck from './ActivityCheck'
 
@@ -45,7 +44,6 @@ export default function ActivityCheckPage() {
           </IconButton>
           <Typography sx={{ fontSize: '1rem', fontWeight: 600 }}>Activity check</Typography>
         </Box>
-        <ThemeModeToggle />
       </Box>
 
       <Box component="main" sx={{ flex: 1, px: 3, py: 2, overflow: 'auto', bgcolor: 'background.default' }}>
