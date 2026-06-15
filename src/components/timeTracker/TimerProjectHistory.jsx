@@ -298,11 +298,7 @@ export default function TimerProjectHistory({ projectId, refreshKey = 0 }) {
 
       {!historyLoading && rows.length === 0 ? (
         <Typography sx={{ fontSize: '0.875rem', color: 'text.disabled' }}>
-          Stopped sessions will appear here. Start the timer, then stop it — or ensure{' '}
-          <Box component="span" sx={{ fontWeight: 600 }}>
-            VITE_TASK_API_BASE_URL
-          </Box>{' '}
-          points to your task service.
+          No history available yet.
         </Typography>
       ) : null}
 

@@ -1,9 +1,9 @@
 const { execSync, spawnSync } = require("node:child_process");
-const os = require("node:os");
 const path = require("node:path");
 
 const root = path.join(__dirname, "..");
-const output = path.join(os.tmpdir(), "time-tracker-release");
+/** Relative path — avoids quoting issues when project path contains spaces. */
+const output = "release";
 const publish = process.argv.includes("--publish");
 
 if (publish && !process.env.GH_TOKEN) {
@@ -37,4 +37,4 @@ if (result.status !== 0) {
   process.exit(result.status ?? 1);
 }
 
-console.log(`\nDone. Installer files are in:\n${output}`);
+console.log(`\nDone. Installer files are in:\n${path.join(root, output)}`);
