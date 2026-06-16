@@ -31,8 +31,8 @@ import { IMAGE_URLS } from '../../constants/imageUrls'
 import { BRAND_COMPANY_NAME } from '../../constants/brand'
 import { ThemeModeMenuToggle } from '../ThemeModeToggle'
 
-const CRM_PROFILE_URL = 'https://evelatebrighttec.netlify.app'
-const CRM_CHATPENAL_URL = 'https://evelatebrighttec.netlify.app/messages'
+const CRM_PROFILE_URL = 'https://elevatebrighttech.netlify.app/'
+const CRM_CHATPENAL_URL = 'https://elevatebrighttech.netlify.app/messages'
 const PAGE_SIDE_INSET = '14px'
 
 /** Opens a CRM URL in the default browser (Electron IPC) or a new tab (web). */

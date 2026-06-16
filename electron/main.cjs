@@ -268,7 +268,7 @@ ipcMain.handle("set-window-theme", (_event, payload) => {
 function createWindow() {
   const initialChrome = WINDOW_CHROME.light;
   const win = new BrowserWindow({
-    title: "Elevate Bright Tec",
+    title: "Elevate Bright Tech",
     icon: fs.existsSync(APP_ICON) ? APP_ICON : undefined,
     width: WINDOW_WIDTH,
     minWidth: WINDOW_WIDTH,
@@ -331,7 +331,7 @@ function createWindow() {
 
       const indexPath = indexHtmlPath();
       dialog.showErrorBox(
-        "Elevate Bright Tec — failed to load",
+        "Elevate Bright Tech — failed to load",
         [
           "The app window could not load the UI.",
           "",
@@ -352,7 +352,7 @@ function createWindow() {
     const indexPath = indexHtmlPath();
     if (!fs.existsSync(indexPath)) {
       dialog.showErrorBox(
-        "Elevate Bright Tec — missing files",
+        "Elevate Bright Tech — missing files",
         [
           "index.html was not found next to the app.",
           "",
@@ -369,7 +369,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  app.setName("Elevate Bright Tec");
+  app.setName("Elevate Bright Tech");
   createWindow();
   probeNativeModule();
   initAutoUpdater();
