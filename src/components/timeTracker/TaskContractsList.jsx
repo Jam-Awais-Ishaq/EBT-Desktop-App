@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
+import { proCardSx } from '../../theme/uiStyles'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -104,12 +105,7 @@ export default function TaskContractsList({ projects = [] }) {
         width: 'min(100%, 560px)',
         maxWidth: 560,
         mx: 'auto',
-        bgcolor: 'background.paper',
-        border: 1,
-        borderColor: 'divider',
-        borderRadius: '5px',
-        overflow: 'hidden',
-        boxShadow: `0 1px 2px ${alpha(theme.palette.text.primary, 0.04)}`,
+        ...proCardSx(theme),
       }}
     >
       {projects.map((project, index) => {
@@ -148,14 +144,19 @@ export default function TaskContractsList({ projects = [] }) {
                 alignItems: 'center',
                 gap: 1.5,
                 px: 2,
-                py: 1.75,
+                py: 1.85,
                 cursor: isDisabled ? 'not-allowed' : 'pointer',
                 opacity: isDisabled ? 0.65 : 1,
-                transition: 'background-color 0.15s ease',
+                transition: 'background-color 0.15s ease, transform 0.1s ease',
                 '&:hover': isDisabled
                   ? undefined
                   : {
-                      bgcolor: alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.1 : 0.05),
+                      bgcolor: alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.12 : 0.06),
+                    },
+                '&:active': isDisabled
+                  ? undefined
+                  : {
+                      transform: 'scale(0.995)',
                     },
               }}
             >
@@ -163,7 +164,7 @@ export default function TaskContractsList({ projects = [] }) {
                 sx={{
                   width: 44,
                   height: 44,
-                  borderRadius: '5px',
+                  borderRadius: '4px',
                   bgcolor: statusUi.iconBg,
                   display: 'flex',
                   alignItems: 'center',

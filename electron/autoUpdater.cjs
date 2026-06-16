@@ -18,7 +18,7 @@ function promptRestart() {
     .showMessageBox({
       type: "info",
       title: "Update ready",
-      message: "A new version of Time Tracker has been downloaded.",
+      message: "A new version of Elevate Bright Tec has been downloaded.",
       detail: "Restart the app to install the update.",
       buttons: ["Restart now", "Later"],
       defaultId: 0,

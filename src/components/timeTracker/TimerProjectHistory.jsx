@@ -215,7 +215,7 @@ export default function TimerProjectHistory({ projectId, refreshKey = 0 }) {
           'Timer history could not be loaded.'
         if (status === 404) {
           msg =
-            'Timer API not found (404). Point VITE_TASK_API_BASE_URL at the task service, e.g. http://127.0.0.1:5001 (auth runs on a different port).'
+            'Timer API not found (404). Point VITE_TASK_API_BASE_URL at the task service, e.g. http://127.0.0.1:4000 (auth runs on a different port).'
         }
         setHistoryError(msg)
         setRows([])

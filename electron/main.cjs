@@ -268,7 +268,7 @@ ipcMain.handle("set-window-theme", (_event, payload) => {
 function createWindow() {
   const initialChrome = WINDOW_CHROME.light;
   const win = new BrowserWindow({
-    title: "Time Tracker",
+    title: "Elevate Bright Tec",
     icon: fs.existsSync(APP_ICON) ? APP_ICON : undefined,
     width: WINDOW_WIDTH,
     minWidth: WINDOW_WIDTH,
@@ -331,7 +331,7 @@ function createWindow() {
 
       const indexPath = indexHtmlPath();
       dialog.showErrorBox(
-        "Time Tracker — failed to load",
+        "Elevate Bright Tec — failed to load",
         [
           "The app window could not load the UI.",
           "",
@@ -352,7 +352,7 @@ function createWindow() {
     const indexPath = indexHtmlPath();
     if (!fs.existsSync(indexPath)) {
       dialog.showErrorBox(
-        "Time Tracker — missing files",
+        "Elevate Bright Tec — missing files",
         [
           "index.html was not found next to the app.",
           "",
@@ -369,7 +369,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  app.setName("Time Tracker");
+  app.setName("Elevate Bright Tec");
   createWindow();
   probeNativeModule();
   initAutoUpdater();

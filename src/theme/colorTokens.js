@@ -7,6 +7,8 @@
 
 /** Brand accent (light mode buttons / links) */
 export const BRAND_ORANGE_HEX = '#EE651A'
+/** EBT navy — headers, login panel */
+export const BRAND_NAVY_HEX = '#1E3A5F'
 
 export const APP_COLOR_MODE = {
   LIGHT: 'light',
@@ -29,10 +31,11 @@ export const LIGHT_APP_COLORS = {
   borderSubtle: 'rgba(0, 0, 0, 0.1)',
   divider: '#e5e5e5',
   focusRing: 'rgba(238, 101, 26, 0.28)',
-  loginGradientTop: '#ffffff',
-  loginGradientMid: '#f5f5f5',
-  loginGradientDeep: '#eeeeee',
-  loginRadial: 'rgba(0, 0, 0, 0.04)',
+  loginGradientTop: '#f8fafc',
+  loginGradientMid: '#eef2f7',
+  loginGradientDeep: '#e8edf4',
+  loginRadial: 'rgba(30, 58, 95, 0.06)',
+  loginPanelNavy: BRAND_NAVY_HEX,
   successMuted: 'rgba(22, 163, 74, 0.1)',
   successBorder: 'rgba(22, 163, 74, 0.28)',
   successText: '#166534',
@@ -78,6 +81,7 @@ export const DARK_APP_COLORS = {
   loginGradientMid: '#2a2a2e',
   loginGradientDeep: '#242428',
   loginRadial: 'rgba(255, 255, 255, 0.04)',
+  loginPanelNavy: '#2a3f5c',
   successMuted: 'rgba(255, 255, 255, 0.08)',
   successBorder: 'rgba(255, 255, 255, 0.18)',
   successText: '#ffffff',

@@ -1,7 +1,11 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import { alpha, useTheme } from '@mui/material/styles'
 import { memo, useEffect, useState } from 'react'
+
+import { primaryActionButtonSx, sectionLabelSx } from '../../theme/uiStyles'
 
 /**
  * Inline work memo — local draft for instant typing; Redux/DB sync on blur via onCommit.
@@ -16,6 +20,7 @@ function ProjectWorkMemo({
   submitting = false,
   onSubmit,
 }) {
+  const theme = useTheme()
   const [draft, setDraft] = useState(value ?? '')
   const hasMemo = Boolean(String(draft).trim())
 
@@ -24,12 +29,13 @@ function ProjectWorkMemo({
   }, [value])
 
   return (
-    <Box sx={{ py: 2 }}>
+    <Box sx={{ py: 1.5 }}>
+      <Typography sx={{ ...sectionLabelSx, mb: 1.25 }}>Work summary</Typography>
       <TextField
         fullWidth
         multiline
-        minRows={2}
-        maxRows={4}
+        minRows={3}
+        maxRows={5}
         placeholder="What are you working on?"
         value={draft}
         onChange={(e) => {
@@ -45,35 +51,41 @@ function ProjectWorkMemo({
         disabled={submitted || saving}
         sx={{
           '& .MuiOutlinedInput-root': {
-            borderRadius: '4px',
+            borderRadius: '6px',
             fontSize: '0.9375rem',
             bgcolor: 'background.paper',
             '& fieldset': { borderColor: 'divider' },
-            '&:hover fieldset': { borderColor: 'text.disabled' },
-            '&.Mui-focused fieldset': { borderColor: 'text.secondary' },
+            '&:hover fieldset': { borderColor: alpha(theme.palette.primary.main, 0.4) },
+            '&.Mui-focused fieldset': { borderColor: 'primary.main', borderWidth: 2 },
+          },
+          '& .MuiInputBase-input': {
+            color: 'text.primary',
+            fontWeight: 500,
           },
           '& .MuiInputBase-input::placeholder': {
-            color: 'text.disabled',
+            color: 'text.secondary',
             opacity: 1,
           },
         }}
       />
       <Button
         variant="contained"
+        color="primary"
         fullWidth
         disabled={!hasMemo || submitted || submitting}
         onClick={() => onSubmit?.(draft)}
         sx={{
-          mt: 1.5,
-          py: 1.25,
-          borderRadius: '4px',
-          textTransform: 'none',
-          fontWeight: 600,
-          fontSize: '0.9375rem',
+          mt: 1.75,
+          ...primaryActionButtonSx(theme),
         }}
       >
-        {submitted ? 'Submitted' : submitting ? 'Submitting…' : 'Submit'}
+        {submitted ? 'Submitted' : submitting ? 'Submitting…' : 'Submit for review'}
       </Button>
+      {!hasMemo && !submitted ? (
+        <Typography sx={{ mt: 1, fontSize: '0.75rem', color: 'text.secondary', textAlign: 'center' }}>
+          Add a short summary before submitting.
+        </Typography>
+      ) : null}
     </Box>
   )
 }

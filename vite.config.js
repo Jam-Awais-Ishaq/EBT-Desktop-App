@@ -3,15 +3,15 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-/** Auth (3000) + task (5001) from `.env` — `define` wins over stale shell / old dev-server cache. */
+/** Auth + task ports from `.env` — `define` wins over stale shell / old dev-server cache. */
 function clientEnv(mode) {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     VITE_API_BASE_URL: (
-      env.VITE_API_BASE_URL || 'http://127.0.0.1:3000'
+      env.VITE_API_BASE_URL || 'http://127.0.0.1:5001'
     ).replace(/\/$/, ''),
     VITE_TASK_API_BASE_URL: (
-      env.VITE_TASK_API_BASE_URL || 'http://127.0.0.1:5001'
+      env.VITE_TASK_API_BASE_URL || 'http://127.0.0.1:4000'
     ).replace(/\/$/, ''),
     VITE_CLOUDINARY_CLOUD_NAME: String(
       env.VITE_CLOUDINARY_CLOUD_NAME || '',
@@ -72,12 +72,12 @@ export default defineConfig(({ command, mode }) => {
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:3000',
+        target: env.VITE_API_BASE_URL,
         changeOrigin: true,
       },
-      /** Task backend (5001) — same-origin so Electron/Vite on 5174+ avoids CORS. */
+      /** Task backend — same-origin so Electron/Vite avoids CORS. */
       '/task-api': {
-        target: 'http://127.0.0.1:5001',
+        target: env.VITE_TASK_API_BASE_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/task-api/, ''),
       },

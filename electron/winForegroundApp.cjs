@@ -53,7 +53,7 @@ const PROCESS_NAME_MAP = {
   slack: 'Slack',
   Discord: 'Discord',
   Spotify: 'Spotify',
-  electron: 'Time Tracker',
+  electron: 'Elevate Bright Tec',
   node: 'Node.js',
 }
 

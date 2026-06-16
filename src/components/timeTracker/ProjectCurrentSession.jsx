@@ -1,8 +1,10 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
 import { useTheme } from '@mui/material/styles'
 import { useEffect, useRef } from 'react'
 import { BRAND_ORANGE_HEX } from '../../theme/colorTokens'
+import { proCardSx } from '../../theme/uiStyles'
 import { playClockTowerChimes } from './clockChimes'
 import { TIMER_TIME_ZONE } from './timerTimeZone'
 
@@ -66,12 +68,14 @@ export default function ProjectCurrentSession({
   }, [elapsedSec, running])
 
   return (
-    <Box
-      sx={{
-        py: 2,
-        borderBottom: 1,
-        borderColor: 'divider',
-      }}
+    <Paper
+      elevation={0}
+      sx={(theme) => ({
+        mt: 2,
+        mb: 1,
+        p: 2.25,
+        ...proCardSx(theme),
+      })}
     >
       <Box
         sx={{
@@ -224,6 +228,6 @@ export default function ProjectCurrentSession({
           {formatTotalTrackedHours(totalTrackedSec)}
         </Typography>
       </Box>
-    </Box>
+    </Paper>
   )
 }

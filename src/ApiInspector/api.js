@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-/** Auth / profile service. Task APIs use `apiTask.js` → port 5001. */
-const AUTH_SERVICE_DEFAULT_DEV = 'http://127.0.0.1:3000'
+/** Auth / profile service. Task APIs use `apiTask.js` (separate port). */
+const AUTH_SERVICE_DEFAULT_DEV = 'http://127.0.0.1:5001'
 
 function resolveAuthBaseUrl() {
   const raw = String(import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')

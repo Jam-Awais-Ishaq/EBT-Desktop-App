@@ -1,17 +1,17 @@
 /**
  * Central registry for image URLs used in the app.
- * Light logo: bundled asset (works with Electron `file://`).
- * Dark logo: `public/gdc_black.png` (copied to dist root on build).
+ * Assets live in `public/` (works with Electron `file://` in production).
  */
-import globalDigitalCareLogoMark from '../assets/gdc-logo.png?url'
-
 const publicAsset = (name) => `${import.meta.env.BASE_URL}${name}`
 
 export const IMAGE_URLS = {
-  globalDigitalCareLogoMark,
-  globalDigitalCareLogoMarkDark: publicAsset('gdc_black.png'),
+  brandIcon: publicAsset('brand-logo.png'),
+  brandLogoLight: publicAsset('EBT.lightLogo.png'),
+  brandLogoDark: publicAsset('EBT.darkLogo.png'),
+  brandAuthPanelIcon: publicAsset('brand/brand-logo-auth-panel.png'),
 }
 
-/** Same asset on Cloudinary (e.g. for sharing or non-Vite tools). */
-export const GLOBAL_DIGITAL_CARE_LOGO_REMOTE =
-  'https://res.cloudinary.com/djnzgjkgf/image/upload/v1777703554/gdc_pdj8mm.png'
+/** @deprecated use brandLogoLight / brandLogoDark */
+export const brandWordmarkLight = IMAGE_URLS.brandLogoLight
+/** @deprecated use brandLogoDark */
+export const brandWordmarkDark = IMAGE_URLS.brandLogoDark

@@ -43,7 +43,7 @@ export function createAppTheme(mode) {
       },
     },
     shape: {
-      borderRadius: 12,
+      borderRadius: 6,
     },
     typography: {
       fontFamily:
@@ -84,10 +84,34 @@ export function createAppTheme(mode) {
             },
           },
           containedPrimary: {
+            color: '#ffffff',
             background: `linear-gradient(180deg, ${c.brandOrangeLight} 0%, ${c.brandOrange} 100%)`,
             '&:hover': {
               background: `linear-gradient(180deg, ${c.brandOrange} 0%, ${c.brandOrangeDark} 100%)`,
             },
+            '&.Mui-disabled': {
+              opacity: 1,
+              color: '#ffffff',
+              background: isDark
+                ? alpha('#ffffff', 0.22)
+                : alpha(c.brandOrange, 0.38),
+            },
+          },
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 10,
+          },
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            fontSize: '0.9375rem',
+            fontWeight: 500,
+            minHeight: 44,
           },
         },
       },
@@ -99,7 +123,7 @@ export function createAppTheme(mode) {
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            borderRadius: 10,
+            borderRadius: 6,
             backgroundColor: isDark ? c.backgroundElevated : alpha(c.backgroundElevated, 0.65),
             transition: 'background-color 0.15s ease, box-shadow 0.15s ease',
             '&:hover': {
@@ -132,6 +156,13 @@ export function createAppTheme(mode) {
             fontWeight: 500,
             '&.Mui-focused': {
               color: c.brandOrange,
+            },
+            '&.MuiInputLabel-shrink': {
+              paddingLeft: 6,
+              paddingRight: 6,
+              marginLeft: -2,
+              backgroundColor: c.backgroundPaper,
+              lineHeight: 1.2,
             },
           },
         },

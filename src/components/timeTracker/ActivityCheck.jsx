@@ -1,7 +1,8 @@
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-import { alpha, useTheme } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
+import { proCardSx, sectionLabelSx } from '../../theme/uiStyles'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -128,20 +129,8 @@ export default function ActivityCheck() {
   }, [sessionId, dispatch])
 
   return (
-    <Box
-      sx={{
-        mt: 1.5,
-        p: 2,
-        borderRadius: '12px',
-        border: 1,
-        borderColor: 'divider',
-        bgcolor: alpha(theme.palette.background.paper, theme.palette.mode === 'dark' ? 0.5 : 0.85),
-        textAlign: 'left',
-      }}
-    >
-      <Typography sx={{ fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', mb: 1.5 }}>
-        SESSION TOTALS
-      </Typography>
+    <Box sx={{ ...proCardSx(theme), p: 2.25, textAlign: 'left' }}>
+      <Typography sx={{ ...sectionLabelSx, mb: 1.5 }}>Session totals</Typography>
       <Box
         sx={{
           display: 'grid',
@@ -159,9 +148,7 @@ export default function ActivityCheck() {
             bgcolor: 'background.paper',
           }}
         >
-          <Typography sx={{ fontSize: '0.7rem', color: 'text.secondary', textTransform: 'uppercase' }}>
-            Clicks
-          </Typography>
+          <Typography sx={{ ...sectionLabelSx, fontSize: '0.65rem', mb: 0.5 }}>Clicks</Typography>
           <Typography sx={{ fontSize: '1.5rem', fontWeight: 700, color: 'text.primary' }}>
             {totalClicks.toLocaleString()}
           </Typography>
@@ -176,27 +163,17 @@ export default function ActivityCheck() {
             bgcolor: 'background.paper',
           }}
         >
-          <Typography sx={{ fontSize: '0.7rem', color: 'text.secondary', textTransform: 'uppercase' }}>
-            Keypresses
-          </Typography>
+          <Typography sx={{ ...sectionLabelSx, fontSize: '0.65rem', mb: 0.5 }}>Keypresses</Typography>
           <Typography sx={{ fontSize: '1.5rem', fontWeight: 700, color: 'text.primary' }}>
             {totalKeypresses.toLocaleString()}
           </Typography>
         </Paper>
       </Box>
 
-      <Typography
-        sx={{
-          fontSize: '0.75rem',
-          fontWeight: 600,
-          color: 'text.secondary',
-          mt: 2.5,
-          mb: 1.25,
-        }}
-      >
-        WORK SCREENSHOTS (this session)
+      <Typography sx={{ ...sectionLabelSx, mt: 2.5, mb: 1 }}>
+        Work screenshots (this session)
       </Typography>
-      <Typography sx={{ fontSize: '0.75rem', color: 'text.disabled', mb: 1.25 }}>
+      <Typography sx={{ fontSize: '0.8125rem', color: 'text.secondary', mb: 1.25, lineHeight: 1.5 }}>
         {sessionId
           ? 'Automatic capture while the project timer runs (Electron; testing: every 10s). New saves go to Cloudinary when the task API has Cloudinary env set.'
           : sessionScreenshots.length > 0
@@ -214,7 +191,7 @@ export default function ActivityCheck() {
             bgcolor: 'background.paper',
           }}
         >
-          <Typography sx={{ fontSize: '0.8125rem', color: 'text.disabled' }}>
+          <Typography sx={{ fontSize: '0.875rem', color: 'text.secondary', lineHeight: 1.5 }}>
             {sessionId
               ? 'No screenshots yet — testing mode: first capture after 10s, then every 10s while the timer runs.'
               : '—'}

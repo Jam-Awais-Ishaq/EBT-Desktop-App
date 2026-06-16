@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
+import { alpha, useTheme } from '@mui/material/styles'
 import { useEffect, useRef, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -618,9 +618,12 @@ export default function ProjectStats() {
             justifyContent: 'space-between',
             gap: 1,
             pt: 1.5,
-            pb: 2,
+            pb: 1.75,
             borderBottom: 1,
             borderColor: 'divider',
+            bgcolor: isDark ? 'transparent' : alpha(theme.palette.primary.main, 0.04),
+            borderRadius: '4px',
+            px: 0.5,
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1, gap: 0.25 }}>
@@ -632,19 +635,33 @@ export default function ProjectStats() {
             >
               <ChevronLeft sx={{ fontSize: 28 }} />
             </IconButton>
-            <Typography
-              sx={{
-                fontSize: '1.25rem',
-                fontWeight: 700,
-                color: accentColor,
-                lineHeight: 1,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {project.name}
-            </Typography>
+            <Box sx={{ minWidth: 0 }}>
+              <Typography
+                sx={{
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  color: 'text.secondary',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  lineHeight: 1.2,
+                }}
+              >
+                Active contract
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: '1.125rem',
+                  fontWeight: 700,
+                  color: accentColor,
+                  lineHeight: 1.25,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {project.name}
+              </Typography>
+            </Box>
           </Box>
         </Box>
 

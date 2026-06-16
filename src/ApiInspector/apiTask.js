@@ -1,8 +1,8 @@
 // src/ApiInspector/apiTask.js
 import axios from 'axios'
 
-/** Task service (taskmanagment-backend, timer). Vite `/api` proxy → auth (~3000), not tasks — keep this on 5001. */
-const TASK_SERVICE_DEFAULT_DEV = 'http://127.0.0.1:5001'
+/** Task service (taskmanagment-backend, timer). Vite `/api` proxy → auth, not tasks. */
+const TASK_SERVICE_DEFAULT_DEV = 'http://127.0.0.1:4000'
 
 /** Dev: Vite `/task-api` → :5001 (same origin; fixes CORS when dev server is not :5173). */
 function resolveTaskApiBase() {

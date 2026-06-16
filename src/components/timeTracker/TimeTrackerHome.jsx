@@ -26,10 +26,13 @@ import {
 } from './taskProjectUtils'
 import { logout as logoutAction } from '../../store/loginFormSlice'
 import { BRAND_ORANGE_HEX } from '../../theme/colorTokens'
+import { appChromeHeaderSx, toolbarIconButtonSx } from '../../theme/uiStyles'
+import { IMAGE_URLS } from '../../constants/imageUrls'
+import { BRAND_COMPANY_NAME } from '../../constants/brand'
 import { ThemeModeMenuToggle } from '../ThemeModeToggle'
 
-const CRM_PROFILE_URL = 'https://gdc-crm-woad.vercel.app'
-const CRM_CHATPENAL_URL = 'https://gdc-crm-woad.vercel.app'
+const CRM_PROFILE_URL = 'https://evelatebrighttec.netlify.app'
+const CRM_CHATPENAL_URL = 'https://evelatebrighttec.netlify.app/messages'
 const PAGE_SIDE_INSET = '14px'
 
 /** Opens a CRM URL in the default browser (Electron IPC) or a new tab (web). */
@@ -181,6 +184,26 @@ export default function TimeTrackerHome() {
       }}
     >
       <Box
+        component="header"
+        sx={appChromeHeaderSx(theme)}
+      >
+        <Box
+          component="img"
+          src={IMAGE_URLS.brandIcon}
+          alt={BRAND_COMPANY_NAME}
+          sx={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }}
+        />
+        <Box sx={{ minWidth: 0, flex: 1 }}>
+          <Typography sx={{ fontSize: '0.9375rem', fontWeight: 700, lineHeight: 1.2, color: 'text.primary' }}>
+            {BRAND_COMPANY_NAME}
+          </Typography>
+          <Typography sx={{ fontSize: '0.75rem', color: 'text.secondary', lineHeight: 1.3 }}>
+            Time tracker · Contracts
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box
         component="main"
         sx={{
           flex: 1,
@@ -192,16 +215,26 @@ export default function TimeTrackerHome() {
         <Typography
           component="h1"
           sx={{
-            fontSize: '1.5rem',
+            fontSize: '1.375rem',
             fontWeight: 700,
             px: PAGE_SIDE_INSET,
-            pt: 3,
-            pb: 0,
+            pt: 2,
+            pb: 0.25,
             color: 'text.primary',
             letterSpacing: '-0.02em',
           }}
         >
           All contracts
+        </Typography>
+        <Typography
+          sx={{
+            px: PAGE_SIDE_INSET,
+            pb: 0.5,
+            fontSize: '0.8125rem',
+            color: 'text.secondary',
+          }}
+        >
+          {isLoading ? 'Loading…' : `${projects.length} open contract${projects.length === 1 ? '' : 's'}`}
         </Typography>
 
         <Box
@@ -225,16 +258,14 @@ export default function TimeTrackerHome() {
               minWidth: 200,
               maxWidth: '100%',
               '& .MuiOutlinedInput-root': {
-                height: 40,
-                borderRadius: '5px',
+                height: 42,
+                borderRadius: '4px',
                 bgcolor: 'background.paper',
                 fontSize: '0.9375rem',
+                fontWeight: 500,
                 '& fieldset': { borderColor: 'divider' },
                 '&:hover fieldset': {
                   borderColor: alpha(theme.palette.primary.main, 0.45),
-                },
-                '&.Mui-focused': {
-                  boxShadow: 'none',
                 },
                 '&.Mui-focused fieldset': {
                   borderColor: 'primary.main',
@@ -262,16 +293,7 @@ export default function TimeTrackerHome() {
               aria-label="Open activity check"
               size="small"
               onClick={() => navigate('/activity-check')}
-              sx={{
-                width: 40,
-                height: 40,
-                borderRadius: '5px',
-                border: 1,
-                borderColor: 'divider',
-                bgcolor: 'background.paper',
-                flexShrink: 0,
-                color: 'primary.main',
-              }}
+              sx={toolbarIconButtonSx(theme)}
             >
               <AnalyticsOutlined sx={{ fontSize: 22 }} />
             </IconButton>
@@ -281,15 +303,7 @@ export default function TimeTrackerHome() {
             size="small"
             disabled={isLoading}
             onClick={() => void loadTasks()}
-            sx={{
-              width: 40,
-              height: 40,
-              borderRadius: '5px',
-              border: 1,
-              borderColor: 'divider',
-              bgcolor: 'background.paper',
-              flexShrink: 0,
-            }}
+            sx={toolbarIconButtonSx(theme)}
           >
             <Refresh sx={{ color: 'primary.main', fontSize: 22 }} />
           </IconButton>
@@ -306,11 +320,11 @@ export default function TimeTrackerHome() {
             alignItems: 'center',
           }}
         >
-          <Typography sx={{ fontSize: '0.875rem', fontWeight: 700, color: 'text.primary' }}>
+          <Typography sx={{ fontSize: '0.8125rem', fontWeight: 700, color: 'text.secondary', letterSpacing: '0.04em' }}>
             Contract
           </Typography>
-          <Typography sx={{ fontSize: '0.875rem', fontWeight: 700, color: 'text.primary' }}>
-            Status
+          <Typography sx={{ fontSize: '0.8125rem', fontWeight: 700, color: 'text.secondary', letterSpacing: '0.04em' }}>
+            Status & time
           </Typography>
         </Box>
 
@@ -472,16 +486,16 @@ export default function TimeTrackerHome() {
                 void openCrmExternalLink(CRM_CHATPENAL_URL)
               }}
               sx={{
-                width: 40,
-                height: 40,
-                borderRadius: '10px',
+                width: 42,
+                height: 42,
+                borderRadius: '4px',
                 border: 1,
                 borderColor: 'divider',
-                bgcolor: 'background.paper',
+                bgcolor: alpha(BRAND_ORANGE_HEX, 0.1),
                 color: BRAND_ORANGE_HEX,
                 flexShrink: 0,
                 '&:hover': {
-                  bgcolor: 'background.paper',
+                  bgcolor: alpha(BRAND_ORANGE_HEX, 0.16),
                   color: BRAND_ORANGE_HEX,
                 },
               }}
