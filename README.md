@@ -1,16 +1,8 @@
-# React + Vite
+CRM DESKTOP PRODUCTION APP 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<img width="1364" height="767" alt="image" src="https://github.com/user-attachments/assets/cb981dff-4863-42cd-9c21-26ede9fa4395" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/a46fc1db-fdaf-4aaf-b808-4f339f6e92bf" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9375ff4f-2c7f-4f39-95bd-66f181c6a281" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/fea26177-ced4-45d0-b512-bfd17cde3b64" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/8025b84d-81eb-4570-884e-cc99bd0f2698" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/dce1b4a0-7ee2-434a-9375-6a4748b101a2" />
